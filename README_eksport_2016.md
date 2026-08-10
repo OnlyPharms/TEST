@@ -16,10 +16,11 @@ Eksport 98 pytań do formatu Only Pharms.
 Układ kolumn, `Type=testowe` i sposób rozłożenia pytań typu K — identyczne
 jak w pliku 2014/2015 (opis w `README_eksport.md`).
 
-## Dlaczego 99, a nie 100
+## Dlaczego 98, a nie 100
 
 W oryginalnym PDF **nie ma pytania 11** — numeracja przeskakuje z 10 na 12.
-Sprawdzone na poziomie układu strony, to nie błąd ekstrakcji.
+Sprawdzone na poziomie układu strony, to nie błąd ekstrakcji. Dodatkowo
+usunięto pyt. 61 jako duplikat (patrz niżej).
 
 ## Struktura egzaminu
 
@@ -32,7 +33,7 @@ w formacie Only Pharms zapisujemy prawdziwość każdego stwierdzenia z osobna.
 
 ## Działy
 
-95 z 99 pytań zaimportuje się od razu. Pozostałe 4 używają działów
+94 z 98 pytań zaimportuje się od razu. Pozostałe 4 używają działów
 zgłoszonych już przy pliku 2014/2015 — **nie dochodzi żaden nowy**:
 
 | Section | Pytania 2016 |
