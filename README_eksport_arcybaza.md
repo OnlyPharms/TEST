@@ -29,7 +29,7 @@ w pliku 2016/2017, a inaczej niż w plikach 2014/2015, 2016 i 2022.
 
 Pytania mają 4 opcje, z których poprawna może być dowolna liczba (1–4).
 To dokładnie model Only Pharms: `True` = opcje podświetlone, `False` =
-pozostałe. Rozkład: 1 poprawna – 277, 2 – 574, 3 – 366, 4 – 274.
+pozostałe. Rozkład: 1 poprawna – 207, 2 – 434, 3 – 266, 4 – 198.
 
 ## Bilans
 
@@ -57,7 +57,7 @@ dystraktorów — przy tej skali byłoby to 195 zmyślonych zestawów.
 ## Klasyfikacja jest automatyczna — to główna różnica
 
 W poprzednich czterech plikach `Section` i `Category` przypisywałam ręcznie,
-pytanie po pytaniu. Przy 1265 pytaniach zrobił to klasyfikator słownikowy
+pytanie po pytaniu. Przy 1105 pytaniach zrobił to klasyfikator słownikowy
 (ok. 900 wzorców leków i pojęć, ograniczony do nazw dozwolonych
 w `JAK_KATEGORYZOWAC.txt`).
 
@@ -116,13 +116,14 @@ Po dopisaniu wczytuje się **1473 / 1473 pytań**.
 
 ## Czego nie zrobiłam
 
-- Weryfikacja krzyżowa opisana jest w `README_weryfikacja.md`. Nie sprawdzałam jednak merytorycznie każdego z 1105 pytań osobno. Pochodzi on od studentów
-  (poza latami 2018+, gdzie okładka deklaruje klucz oficjalny) i miejscami
-  może być błędny. Nie sprawdzałam 1265 pytań pojedynczo.
+- Kontrola krzyżowa jest opisana w `README_weryfikacja.md`. Nie sprawdzałam
+  jednak merytorycznie każdego z 1105 pytań osobno — klucz pochodzi od
+  studentów (poza latami 2018+, gdzie okładka deklaruje klucz oficjalny)
+  i miejscami może być błędny.
 - Nie usuwałam pytań powtarzających się między ARCYBAZĄ a czterema
   wcześniejszymi plikami — to inne kierunki (lekarski vs stomatologia)
   i inne brzmienia, ale część tematów się pokrywa.
-- Nie dopisywałam dystraktorów do 225 pytań, które ich nie mają.
+- Nie dopisywałam dystraktorów do 195 pytań, które ich nie mają.
 
 ## Stan całości
 
