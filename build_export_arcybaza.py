@@ -33,29 +33,90 @@ HEADER = (["Section", "Category", "Poziom", "Type", "Question"]
           + ["Zrodlo", "Pewnosc"])
 
 
+
+# --- czyszczenie notatek studenckich doklejonych do tresci opcji ---
+CUT = [
+    re.compile(r'\s*[•▪]\s.*$', re.S),                       # lista wypunktowana
+    re.compile(r'\s+(?=(?:[A-ZĄĆĘŁŃÓŚŹŻ]{4,}[\s,–-]+){2,})'),  # ciag WERSALIKOW
+    re.compile(r'\s*[-–]\s*(nie |tak |chyba |bo |raczej |imo|moim zdaniem|wg mnie)\b.*$',
+               re.I | re.S),
+    re.compile(r'\s*\?\s*[-–].*$', re.S),
+    re.compile(r'\s+TO\s+[A-ZĄĆĘŁŃÓŚŹŻ]{4,}.*$', re.S),
+]
+
+
+def strip_note(t):
+    for rx in CUT:
+        t = rx.sub('', t)
+    return re.sub(r'\s+', ' ', t).strip(' .;,–-')
+
+
 def norm(s):
     return re.sub(r'[^a-z0-9]', '',
                   unicodedata.normalize('NFKD', s.lower())
                   .encode('ascii', 'ignore').decode())
 
 
+
+# --- poprawki merytoryczne naniesione po weryfikacji krzyzowej ---
+# (tresc pytania -> opcje, ktore musza byc oznaczone jako poprawne)
+CORRECTIONS = {
+    # Student podswietlil tylko "tiazydy". Diuretyki petlowe wywoluja zasadowice
+    # hipochloremiczna - potwierdza to oficjalny klucz egzaminu 2016/2017.
+    'zasadowicemetabolicznamogapowodowac': ['diuretyki pętlowe'],
+}
+
+
+def apply_corrections(q):
+    want = CORRECTIONS.get(norm(q['text']))
+    if not want:
+        return 0
+    hit = 0
+    for o in q['opts']:
+        if any(norm(w) == norm(o['text']) for w in want) and o['tag'] not in ('G', 'Y'):
+            o['tag'] = 'G'
+            hit += 1
+    return hit
+
+
 def collect():
     secs = json.load(open(os.path.join(SCRATCH, 'arcy_parsed2.json')))
-    seen, out, stats = {}, [], Counter()
+    cand, stats = [], Counter()
     for s in secs:
         for q in s['qs']:
             stats['wszystkie'] += 1
             if not any(o['tag'] in ('G', 'Y') for o in q['opts']):
                 stats['bez klucza'] += 1
                 continue
-            key = norm(q['text']) + '|' + '|'.join(
-                sorted(norm(o['text']) for o in q['opts']))
-            if key in seen:
-                stats['duplikaty'] += 1
+            for o in q['opts']:
+                o['text'] = strip_note(o['text'])
+            q['opts'] = [o for o in q['opts'] if o['text']]
+            if not q['opts'] or not any(o['tag'] in ('G', 'Y') for o in q['opts']):
+                stats['bez klucza'] += 1
                 continue
-            seen[key] = 1
             q['src'] = s['name']
-            out.append(q)
+            q['annot'] = s['name'].startswith('EGZAMIN IWL')
+            cand.append(q)
+
+    # kopia adnotowana ustepuje wersji czystej o tej samej tresci pytania
+    clean_stems = {norm(q['text'])[:70] for q in cand if not q['annot']}
+    kept = []
+    for q in cand:
+        if q['annot'] and norm(q['text'])[:70] in clean_stems:
+            stats['adnotowany duplikat'] += 1
+            continue
+        kept.append(q)
+
+    seen, out = {}, []
+    for q in kept:
+        key = norm(q['text']) + '|' + '|'.join(
+            sorted(norm(o['text']) for o in q['opts']))
+        if key in seen:
+            stats['duplikaty'] += 1
+            continue
+        seen[key] = 1
+        stats['poprawki'] += apply_corrections(q)
+        out.append(q)
     return out, stats
 
 
@@ -118,8 +179,10 @@ def main():
 
     print('sparsowane pytania:      ', stats['wszystkie'])
     print('  bez klucza (odrzucone):', stats['bez klucza'])
+    print('  kopia adnotowana (odrzucone):', stats['adnotowany duplikat'])
     print('  duplikaty (odrzucone): ', stats['duplikaty'])
     print('  bez dzialu (odrzucone):', len(dropped))
+    print('  poprawki merytoryczne:', stats['poprawki'])
     print('WYEKSPORTOWANO:          ', len(rows))
     print('  w tym bez dystraktorow (same poprawne):', noF)
     print()
