@@ -36,13 +36,22 @@ HEADER = (["Section", "Category", "Poziom", "Type", "Question"]
 
 # --- czyszczenie notatek studenckich doklejonych do tresci opcji ---
 CUT = [
-    re.compile(r'\s*[•▪]\s.*$', re.S),                       # lista wypunktowana
-    re.compile(r'\s+(?=(?:[A-ZĄĆĘŁŃÓŚŹŻ]{4,}[\s,–-]+){2,})'),  # ciag WERSALIKOW
+    re.compile(r'\s*[•▪]\s.*$', re.S),                        # lista wypunktowana
     re.compile(r'\s*[-–]\s*(nie |tak |chyba |bo |raczej |imo|moim zdaniem|wg mnie)\b.*$',
                re.I | re.S),
     re.compile(r'\s*\?\s*[-–].*$', re.S),
     re.compile(r'\s+TO\s+[A-ZĄĆĘŁŃÓŚŹŻ]{4,}.*$', re.S),
+    # notatka WERSALIKAMI po spacji  ("... iv TYLKO NA TE")
+    re.compile(r'\s+(?=(?:[A-ZĄĆĘŁŃÓŚŹŻ]{3,}[\s,:;.!?–-]+){1,}[A-ZĄĆĘŁŃÓŚŹŻ]{3,}).*$', re.S),
+    # notatka WERSALIKAMI sklejona bez spacji ("...skurczowejKORZYSTNA ROKOWNICZO")
+    re.compile(r'(?<=[a-ząćęłńóśźż])(?=[A-ZĄĆĘŁŃÓŚŹŻ]{3,}(?:[\s,:;.!?–-]+[A-ZĄĆĘŁŃÓŚŹŻ]{3,}|[A-ZĄĆĘŁŃÓŚŹŻ]{3,})).*$', re.S),
 ]
+
+# wzorce, ktorych obecnosc dyskwalifikuje wiersz (zostaje odrzucony, nie publikowany)
+DIRTY = re.compile(
+    r'[a-e]\s*[–-]\s*praw(idłow|dziw)|(?:[A-ZĄĆĘŁŃÓŚŹŻ]{4,}[\s,:;–-]+){2,}|!!|\?\?'
+    r'|[•▪]|-\s*>|–\s*>'
+    r'|\b(chyba|imo|nwm|moim zdaniem|wg mnie|nie pamiętam|prezka|slajd|sketchy)\b')
 
 
 def strip_note(t):
@@ -98,17 +107,31 @@ def collect():
             q['annot'] = s['name'].startswith('EGZAMIN IWL')
             cand.append(q)
 
-    # kopia adnotowana ustepuje wersji czystej o tej samej tresci pytania
-    clean_stems = {norm(q['text'])[:70] for q in cand if not q['annot']}
+    # Sekcje IWL to robocza, adnotowana kopia studencka: notatki sa wklejone
+    # w tresc opcji i pytan, czesto mala litera, bez zadnego stalego znacznika.
+    # Nie da sie zagwarantowac ich czystosci filtrami, wiec odrzucamy je w calosci.
     kept = []
     for q in cand:
-        if q['annot'] and norm(q['text'])[:70] in clean_stems:
-            stats['adnotowany duplikat'] += 1
+        if q['annot']:
+            stats['kopia adnotowana IWL'] += 1
             continue
         kept.append(q)
 
-    seen, out = {}, []
+    # Ten sam stem bywa w dokumencie w kilku wariantach - jeden czysty, inny
+    # z notatka doklejona do opcji. Zostawiamy wariant o najkrotszych opcjach.
+    best = {}
     for q in kept:
+        stem = norm(q['text'])[:80]
+        w = sum(len(o['text']) for o in q['opts'])
+        if stem not in best or w < best[stem][0]:
+            if stem in best:
+                stats['wariant z notatka'] += 1
+            best[stem] = (w, q)
+        else:
+            stats['wariant z notatka'] += 1
+
+    seen, out = {}, []
+    for _, q in best.values():
         key = norm(q['text']) + '|' + '|'.join(
             sorted(norm(o['text']) for o in q['opts']))
         if key in seen:
@@ -125,6 +148,9 @@ def build():
     rows, dropped = [], []
     noF = 0
     for q in qs:
+        if DIRTY.search(q['text']) or any(DIRTY.search(o['text']) for o in q['opts']):
+            stats['odrzucone jako zanieczyszczone'] += 1
+            continue
         trues = [o['text'] for o in q['opts'] if o['tag'] in ('G', 'Y')]
         falses = [o['text'] for o in q['opts'] if o['tag'] not in ('G', 'Y')]
         sec, cat, score = C.classify(q['text'], [o['text'] for o in q['opts']])
@@ -179,9 +205,11 @@ def main():
 
     print('sparsowane pytania:      ', stats['wszystkie'])
     print('  bez klucza (odrzucone):', stats['bez klucza'])
-    print('  kopia adnotowana (odrzucone):', stats['adnotowany duplikat'])
+    print('  kopia adnotowana IWL (odrzucone):', stats['kopia adnotowana IWL'])
     print('  duplikaty (odrzucone): ', stats['duplikaty'])
+    print('  warianty z notatka (odrzucone):', stats['wariant z notatka'])
     print('  bez dzialu (odrzucone):', len(dropped))
+    print('  zanieczyszczone (odrzucone):', stats['odrzucone jako zanieczyszczone'])
     print('  poprawki merytoryczne:', stats['poprawki'])
     print('WYEKSPORTOWANO:          ', len(rows))
     print('  w tym bez dystraktorow (same poprawne):', noF)

@@ -1,8 +1,8 @@
-# ARCYBAZA FARMA — 1105 pytań
+# ARCYBAZA FARMA — 802 pytania
 
 > **Zaktualizowane po weryfikacji** (patrz `README_weryfikacja.md`): usunięto
-> 284 wiersze pochodzące z adnotowanej kopii studenckiej i oczyszczono
-> doklejone notatki. Poprzednia wersja miała 1265 wierszy.
+> całą adnotowaną kopię studencką IWL i warianty pytań z doklejonymi
+> notatkami. Szczegóły i wynik audytu: `README_weryfikacja.md`.
 
 | Plik | Do czego |
 |---|---|
@@ -37,10 +37,11 @@ pozostałe. Rozkład: 1 poprawna – 207, 2 – 434, 3 – 266, 4 – 198.
 |---|---|
 | pytań sparsowanych | 1617 |
 | odrzucone: brak klucza | 126 |
-| odrzucone: kopia adnotowana | 284 |
-| odrzucone: duplikaty | 97 |
+| odrzucone: adnotowana kopia IWL | 524 |
+| odrzucone: warianty z notatką | 174 |
+| odrzucone: zanieczyszczone | 2 |
 | odrzucone: brak działu | 5 |
-| **wyeksportowane** | **1105** |
+| **wyeksportowane** | **802** |
 
 Cały egzamin **EGZ 2015 I termin (95 pytań) nie ma zaznaczonego klucza** —
 zgodne z notą na okładce, że oficjalny klucz jest dopiero od 2018. To
@@ -93,7 +94,7 @@ tematy nieobecne w egzaminach stomatologicznych:
 ## Do dopisania w `server.py`
 
 Uruchomiłam prawdziwy importer na wszystkich pięciu plikach naraz.
-Z 1473 wierszy wczytuje się dziś **1279**; pozostałe **194** wpada
+Z 1170 wierszy wczytuje się dziś **1026**; pozostałe **144** wpada
 w `if not dzial: continue` i znika bez komunikatu. Wystarczy dopisać
 do `SECTION_ALIASES`:
 
@@ -112,7 +113,7 @@ do `SECTION_ALIASES`:
 propozycje ID; każdy nowy dział trzeba też dodać do listy działów
 w aplikacji.)
 
-Po dopisaniu wczytuje się **1473 / 1473 pytań**.
+Po dopisaniu wczytuje się **1170 / 1170 pytań**.
 
 ## Czego nie zrobiłam
 
@@ -133,5 +134,5 @@ Po dopisaniu wczytuje się **1473 / 1473 pytań**.
 | 2016 | 99 | ustalony merytorycznie |
 | 2016/2017 | 100 | oficjalny klucz z PDF |
 | 2022 | 69 | rekonstrukcja studencka |
-| ARCYBAZA | 1105 | z podświetleń w PDF |
-| **razem** | **1473** | |
+| ARCYBAZA | 802 | z podświetleń w PDF |
+| **razem** | **1170** | |
