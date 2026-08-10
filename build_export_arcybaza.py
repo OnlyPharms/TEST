@@ -82,6 +82,10 @@ CORRECTIONS = {
     # Student podswietlil tylko "tiazydy". Diuretyki petlowe wywoluja zasadowice
     # hipochloremiczna - potwierdza to oficjalny klucz egzaminu 2016/2017.
     'zasadowicemetabolicznamogapowodowac': ['diuretyki pętlowe'],
+    # Liraglutyd (agonista GLP-1) jest podawany podskornie w cukrzycy typu 2 -
+    # inny wariant tego pytania w ARCYBAZIE zaznacza go jako poprawny.
+    # Potwierdzone przez uzytkowniczke.
+    'terapiacukrzycytypu2podskornie': ['Liraglutyd'],
 }
 
 

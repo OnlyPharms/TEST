@@ -239,3 +239,57 @@ Te 5 warto przejrzeć.
 | **razem** | **1240** |
 
 Importer wczytuje **1085 / 1240**; po dopisaniu ośmiu działów — wszystkie.
+
+
+---
+
+# Aneks 3: dwie poprawki na życzenie
+
+## Usunięty duplikat
+
+Pytanie „Glikokortykosteroidy zmniejszają liczbę:" występowało w plikach
+2014/2015 i 2016 z identyczną treścią i identycznymi odpowiedziami.
+Usunięte z pliku **2016** (zostaje w 2014/2015, gdzie pojawiło się
+pierwsze). Plik 2016: 99 → 98 pytań.
+
+W `build_export_2016.py` pytanie figuruje teraz w słowniku `POMINIETE`
+z podaną przyczyną, więc numeracja i pochodzenie pozostają udokumentowane.
+
+Kontrola po zmianie: **0 identycznych pytań w całym zestawie pięciu plików.**
+
+## Poprawiony liraglutyd
+
+Pytanie „Terapia cukrzycy typu 2 podskórnie" miało w ARCYBAZIE dwa warianty:
+jeden zaznaczał wyłącznie detemir, drugi detemir **i liraglutyd**.
+Liraglutyd, jako agonista GLP-1, jest podawany podskórnie — potwierdzone
+przez użytkowniczkę. Poprawka naniesiona:
+
+| | przed | po |
+|---|---|---|
+| poprawne | Detemir | **Liraglutyd**, Detemir |
+| błędne | Glipizyd, **Liraglutyd**, Linagliptyna | Glipizyd, Linagliptyna |
+
+Zapisana w `build_export_arcybaza.py` w słowniku `CORRECTIONS`, żeby
+przetrwała każdą kolejną regenerację pliku.
+
+## Pozostałe 4 rozbieżności między latami
+
+Nadal nierozstrzygnięte, do ewentualnego przejrzenia:
+„Farmakoterapia POChP kategoria A i B", „Farmakoterapia otyłości"
+(druga wersja dodaje naltrekson), „Metoklopramid",
+„Lek – monitorowanie" (odrzucona wersja zawierała błąd: dabigatran–INR).
+
+## Stan końcowy
+
+| Plik | Pytań |
+|---|---|
+| 2014/2015 | 100 |
+| 2016 | 98 |
+| 2016/2017 | 100 |
+| 2022 | 69 |
+| ARCYBAZA | 872 |
+| **razem** | **1239** |
+
+Kontrola końcowa: 0 wierszy wadliwych, 0 duplikatów, 0 trafień detektora
+zanieczyszczeń. Importer wczytuje **1084 / 1239**; po dopisaniu ośmiu
+działów — wszystkie.

@@ -1,6 +1,9 @@
 # Farmakologia — egzamin 2016 (Stomatologia, lato)
 
-Eksport 99 pytań do formatu Only Pharms.
+> **Aktualizacja:** pyt. 61 usunięte jako dokładny duplikat pyt. 61
+> z egzaminu 2014/2015. Plik ma 98 pytań.
+
+Eksport 98 pytań do formatu Only Pharms.
 
 ## Pliki
 
@@ -39,9 +42,9 @@ zgłoszonych już przy pliku 2014/2015 — **nie dochodzi żaden nowy**:
 
 ## Duplikat względem pliku 2014/2015
 
-Pytanie **61** („Glikokortykosteroidy zmniejszają liczbę:") jest
-**identyczne** z pytaniem 61 z egzaminu 2014/2015 — ta sama treść, te same
-odpowiedzi. Przy wgrywaniu obu plików warto usunąć jeden wiersz.
+Pytanie **61** („Glikokortykosteroidy zmniejszają liczbę:") było
+**identyczne** z pytaniem 61 z egzaminu 2014/2015 — zostało z tego pliku
+usunięte.
 
 Pytania 50 (2016) i 81 (2014/2015) mają identyczną treść pytania
 („Wskaż prawidłowe połączenie lek – działanie niepożądane:"), ale

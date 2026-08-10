@@ -94,7 +94,7 @@ tematy nieobecne w egzaminach stomatologicznych:
 ## Do dopisania w `server.py`
 
 Uruchomiłam prawdziwy importer na wszystkich pięciu plikach naraz.
-Z 1240 wierszy wczytuje się dziś **1085**; pozostałe **155** wpada
+Z 1239 wierszy wczytuje się dziś **1084**; pozostałe **155** wpada
 w `if not dzial: continue` i znika bez komunikatu. Wystarczy dopisać
 do `SECTION_ALIASES`:
 
@@ -113,7 +113,7 @@ do `SECTION_ALIASES`:
 propozycje ID; każdy nowy dział trzeba też dodać do listy działów
 w aplikacji.)
 
-Po dopisaniu wczytuje się **1240 / 1240 pytań**.
+Po dopisaniu wczytuje się **1239 / 1239 pytań**.
 
 ## Czego nie zrobiłam
 
@@ -131,8 +131,8 @@ Po dopisaniu wczytuje się **1240 / 1240 pytań**.
 | Plik | Pytań | Klucz |
 |---|---|---|
 | 2014/2015 | 100 | ustalony merytorycznie |
-| 2016 | 99 | ustalony merytorycznie |
+| 2016 | 98 | ustalony merytorycznie |
 | 2016/2017 | 100 | oficjalny klucz z PDF |
 | 2022 | 69 | rekonstrukcja studencka |
 | ARCYBAZA | 872 | z podświetleń w PDF |
-| **razem** | **1240** | |
+| **razem** | **1239** | |

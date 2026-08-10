@@ -338,7 +338,7 @@ CUKRZYCA,Działania niepożądane,lekarski,testowe,Metformina:,ma klirens nerkow
 CUKRZYCA,Klasyfikacja,lekarski,testowe,Szybkie analogi insuliny,Lispro,Aspart,,,,Glargina,Detemir,,,,EGZ 2017 II termin,niska
 ANTYKONCEPCJA,Działania niepożądane,lekarski,testowe,Działania niepożądane hormonalnych środków antykoncepcyjnych z powodu obecności gestagenu,Przyrost masy ciała,Obniżenie libido,Depresja,Hirsutyzm,,,,,,,EGZ 2017 II termin,srednia
 HORMONY PŁCIOWE,Klasyfikacja,lekarski,testowe,Hiperprolaktynemia,Karbegolina,Bromokryptyna,,,,Gorserelina,Finasteryd,,,,EGZ 2017 II termin,niska
-CUKRZYCA,Sposób podania,lekarski,testowe,Terapia cukrzycy typu 2 podskórnie,Detemir,,,,,Glipizyd,Liraglutyd,Linagliptyna,,,EGZ 2017 II termin,wysoka
+CUKRZYCA,Sposób podania,lekarski,testowe,Terapia cukrzycy typu 2 podskórnie,Liraglutyd,Detemir,,,,Glipizyd,Linagliptyna,,,,EGZ 2017 II termin,wysoka
 TARCZYCA,Klasyfikacja,lekarski,testowe,Terapia nadczynności tarczycy,Jod radioaktywny,Bisoprolol,Tiamazol,Propylotiouracyl,,,,,,,EGZ 2017 II termin,wysoka
 LEKI PRZECIWBAKTERYJNE,Klasyfikacja,lekarski,testowe,Podczas terapii GKS może dojsć do pogorszenia przebiegu,Cukrzycy,Gruźlicy,Osteoporozy,,,Małopłytkowości idiopatycznej,,,,,EGZ 2017 II termin,niska
 NIEOPIOIDOWE LEKI PRZECIWBÓLOWE,Działania niepożądane,lekarski,testowe,Wzrostu ryzyka sercowo-naczyniowego NIE powoduje,Kwas acetylosalicylowy,,,,,Celekoksyb,Indometacyna,Ketoprofen,,,EGZ 2017 II termin,wysoka

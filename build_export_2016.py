@@ -356,11 +356,6 @@ Q = [
   "Listeria monocytogenes"],
  ["Pseudomonas aeruginosa", "Escherichia coli", "Bacteroides fragilis"]),
 
-(61, "GLIKOKORTYKOSTEROIDY", "Mechanizm działania",
- "Glikokortykosteroidy zmniejszają liczbę:",
- ["monocytów", "limfocytów"],
- ["płytek krwi", "neutrofili"]),
-
 (62, "CUKRZYCA", "Mechanizm działania",
  "Wskaż właściwe stwierdzenia odnoszące się do pramlintydu:",
  ["redukuje glikemię poposiłkową", "hamuje sekrecję glukagonu",
@@ -621,7 +616,7 @@ def main():
     nums = [x[0] for x in Q]
     assert nums == sorted(nums) and len(set(nums)) == len(nums)
     assert 11 not in nums, "pyt. 11 nie istnieje w oryginale"
-    assert len(data) == 99, len(data)
+    assert len(data) == 98, len(data)
 
     base = "farmakologia_egzamin_2016_OnlyPharms"
     with open(base + ".csv", "w", newline="", encoding="utf-8-sig") as f:
@@ -655,7 +650,7 @@ def main():
     wb.save(base + ".xlsx")
 
     from collections import Counter
-    print("wierszy:", len(data), " (brak pyt. 11 - nie ma go w PDF)")
+    print("wierszy:", len(data), " (brak pyt. 11 w PDF; pyt. 61 usuniete jako duplikat)")
     print("Trues:", sum(len(t) for *_, t, _ in Q),
           " Falses:", sum(len(f) for *_, f in Q))
     print("\nSection:")
