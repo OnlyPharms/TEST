@@ -1,4 +1,4 @@
-# ARCYBAZA FARMA — 872 pytania
+# ARCYBAZA FARMA — 868 pytań
 
 > **Zaktualizowane po weryfikacji** (patrz `README_weryfikacja.md`): usunięto
 > całą adnotowaną kopię studencką IWL i warianty pytań z doklejonymi
@@ -29,7 +29,7 @@ w pliku 2016/2017, a inaczej niż w plikach 2014/2015, 2016 i 2022.
 
 Pytania mają 4 opcje, z których poprawna może być dowolna liczba (1–4).
 To dokładnie model Only Pharms: `True` = opcje podświetlone, `False` =
-pozostałe. Rozkład: 1 poprawna – 160, 2 – 338, 3 – 213, 4 – 161.
+pozostałe. Rozkład: 1 poprawna – 158, 2 – 336, 3 – 213, 4 – 161.
 
 ## Bilans
 
@@ -41,7 +41,8 @@ pozostałe. Rozkład: 1 poprawna – 160, 2 – 338, 3 – 213, 4 – 161.
 | odrzucone: warianty z notatką | 104 |
 | odrzucone: zanieczyszczone | 2 |
 | odrzucone: brak działu | 4 |
-| **wyeksportowane** | **872** |
+| odrzucone: sprzeczne warianty | 4 |
+| **wyeksportowane** | **868** |
 
 Cały egzamin **EGZ 2015 I termin (95 pytań) nie ma zaznaczonego klucza** —
 zgodne z notą na okładce, że oficjalny klucz jest dopiero od 2018. To
@@ -58,7 +59,7 @@ dystraktorów — przy tej skali byłoby to 161 zmyślonych zestawów.
 ## Klasyfikacja jest automatyczna — to główna różnica
 
 W poprzednich czterech plikach `Section` i `Category` przypisywałam ręcznie,
-pytanie po pytaniu. Przy 872 pytaniach zrobił to klasyfikator słownikowy
+pytanie po pytaniu. Przy 868 pytaniach zrobił to klasyfikator słownikowy
 (ok. 900 wzorców leków i pojęć, ograniczony do nazw dozwolonych
 w `JAK_KATEGORYZOWAC.txt`).
 
@@ -67,9 +68,9 @@ oparte jest przypisanie działu:
 
 | Pewność | Pytań | Co to znaczy |
 |---|---|---|
-| wysoka | 343 | 3+ trafienia — przypisanie praktycznie pewne |
-| średnia | 271 | 2 trafienia |
-| niska | 258 | 1 trafienie — **te warto przejrzeć** |
+| wysoka | 342 | 3+ trafienia — przypisanie praktycznie pewne |
+| średnia | 270 | 2 trafienia |
+| niska | 256 | 1 trafienie — **te warto przejrzeć** |
 
 Rozkład kategorii wyszedł zbliżony do plików robionych ręcznie (Wskazania
 34%, Klasyfikacja 25%, Działania niepożądane 12%), ale „Klasyfikacja" jest
@@ -94,7 +95,7 @@ tematy nieobecne w egzaminach stomatologicznych:
 ## Do dopisania w `server.py`
 
 Uruchomiłam prawdziwy importer na wszystkich pięciu plikach naraz.
-Z 1239 wierszy wczytuje się dziś **1084**; pozostałe **155** wpada
+Z 1235 wierszy wczytuje się dziś **1080**; pozostałe **155** wpada
 w `if not dzial: continue` i znika bez komunikatu. Wystarczy dopisać
 do `SECTION_ALIASES`:
 
@@ -113,12 +114,12 @@ do `SECTION_ALIASES`:
 propozycje ID; każdy nowy dział trzeba też dodać do listy działów
 w aplikacji.)
 
-Po dopisaniu wczytuje się **1239 / 1239 pytań**.
+Po dopisaniu wczytuje się **1235 / 1235 pytań**.
 
 ## Czego nie zrobiłam
 
 - Kontrola krzyżowa jest opisana w `README_weryfikacja.md`. Nie sprawdzałam
-  jednak merytorycznie każdego z 872 pytań osobno — klucz pochodzi od
+  jednak merytorycznie każdego z 868 pytań osobno — klucz pochodzi od
   studentów (poza latami 2018+, gdzie okładka deklaruje klucz oficjalny)
   i miejscami może być błędny.
 - Nie usuwałam pytań powtarzających się między ARCYBAZĄ a czterema
@@ -134,5 +135,5 @@ Po dopisaniu wczytuje się **1239 / 1239 pytań**.
 | 2016 | 98 | ustalony merytorycznie |
 | 2016/2017 | 100 | oficjalny klucz z PDF |
 | 2022 | 69 | rekonstrukcja studencka |
-| ARCYBAZA | 872 | z podświetleń w PDF |
-| **razem** | **1239** | |
+| ARCYBAZA | 868 | z podświetleń w PDF |
+| **razem** | **1235** | |

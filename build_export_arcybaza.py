@@ -89,6 +89,20 @@ CORRECTIONS = {
 }
 
 
+# Pytania usuniete na zyczenie: w ARCYBAZIE istnieja w kilku wariantach,
+# ktore studenci zaznaczyli SPRZECZNIE, a zrodlo nie pozwala rozstrzygnac,
+# ktory jest poprawny. Dopasowanie po DOKLADNEJ tresci pytania - "Metoklopramid"
+# i "Metoklopramid:" to dwa rozne pytania, usuwamy tylko pierwsze.
+DROP_AMBIGUOUS = {
+    'Farmakoterapia POChP kategoria A i B',
+    'Farmakoterapia otyłości',
+    # wariant zaznaczajacy "Jest agonista receptorow dopaminowych" - blednie,
+    # metoklopramid jest ANTAGONISTA D2
+    'Metoklopramid',
+    'Lek – monitorowanie',
+}
+
+
 def apply_corrections(q):
     want = CORRECTIONS.get(norm(q['text']))
     if not want:
@@ -192,6 +206,9 @@ def build():
     rows, dropped = [], []
     noF = 0
     for q in qs:
+        if q['text'].strip() in DROP_AMBIGUOUS:
+            stats['sprzeczne warianty (usuniete)'] += 1
+            continue
         if DIRTY.search(q['text']) or any(DIRTY.search(o['text']) for o in q['opts']):
             stats['odrzucone jako zanieczyszczone'] += 1
             continue
@@ -254,6 +271,7 @@ def main():
     print('  warianty z notatka (odrzucone):', stats['wariant z notatka'])
     print('  bez dzialu (odrzucone):', len(dropped))
     print('  zanieczyszczone (odrzucone):', stats['odrzucone jako zanieczyszczone'])
+    print('  sprzeczne warianty (usuniete):', stats['sprzeczne warianty (usuniete)'])
     print('  poprawki merytoryczne:', stats['poprawki'])
     print('WYEKSPORTOWANO:          ', len(rows))
     print('  w tym bez dystraktorow (same poprawne):', noF)

@@ -293,3 +293,43 @@ Nadal nierozstrzygnięte, do ewentualnego przejrzenia:
 Kontrola końcowa: 0 wierszy wadliwych, 0 duplikatów, 0 trafień detektora
 zanieczyszczeń. Importer wczytuje **1084 / 1239**; po dopisaniu ośmiu
 działów — wszystkie.
+
+
+---
+
+# Aneks 4: usunięte 4 pytania o sprzecznych wariantach
+
+Na życzenie usunięte z ARCYBAZY cztery pytania, których warianty studenci
+zaznaczyli w różnych latach sprzecznie i których źródło nie pozwala
+rozstrzygnąć:
+
+| Pytanie | Na czym polegała sprzeczność |
+|---|---|
+| „Farmakoterapia POChP kategoria A i B" | jedna wersja: cholinolityki + beta2-mimetyki; druga: GKS + inhibitory PDE4 |
+| „Farmakoterapia otyłości" | druga wersja dodaje naltrekson |
+| „Metoklopramid" | wariant zaznaczał „jest agonistą receptorów dopaminowych" — **błędnie**, metoklopramid jest antagonistą D2 |
+| „Lek – monitorowanie" | odrzucona wersja zawierała błąd (dabigatran–INR) |
+
+Zapisane w `build_export_arcybaza.py` w zbiorze `DROP_AMBIGUOUS`, dopasowanie
+po **dokładnej** treści pytania — „Metoklopramid" i „Metoklopramid:" to dwa
+różne pytania i to drugie (poprawne, o hiperprolaktynemii i objawach
+pozapiramidowych) **zostaje w bazie**. Osobne pytanie „Działanie
+przeciwwymiotne metoklopramidu wynika z blokady receptorów:" też zostaje.
+
+## Stan końcowy
+
+| Plik | Pytań |
+|---|---|
+| 2014/2015 | 100 |
+| 2016 | 98 |
+| 2016/2017 | 100 |
+| 2022 | 69 |
+| ARCYBAZA | 868 |
+| **razem** | **1235** |
+
+Kontrola: **0 wierszy wadliwych, 0 duplikatów, 0 trafień detektora
+zanieczyszczeń.** Importer wczytuje **1080 / 1235**; po dopisaniu ośmiu
+działów — wszystkie.
+
+Nie pozostały już żadne znane, nierozstrzygnięte rozbieżności między
+wariantami.
