@@ -85,7 +85,7 @@ Co zrobiłam:
   że zdarzają się niedomarkowania — mogą być kolejne, których nie wykryje
   porównanie między źródłami, bo dane pytanie występuje tylko raz.
 - **Klasyfikacja `Section`/`Category` w ARCYBAZIE pozostaje automatyczna.**
-  244 pytania mają pewność „niska" — to wciąż pozycja do przejrzenia.
+  258 pytań ma pewność „niska" — to wciąż pozycja do przejrzenia.
 - 37 pytań ma stem przeczący („nie", „fałszywe", „z wyjątkiem"). Są
   poprawnie odwzorowane, ale w trybie fiszki czyta się je nieintuicyjnie.
 
@@ -173,3 +173,69 @@ Poprawka merytoryczna z pkt. 2 (zasadowica metaboliczna) **nie ma już
 zastosowania** — dotyczyła wiersza z kopii IWL, który został usunięty.
 Pytanie w wersji czystej pochodzi z EGZ 2015, który nie ma klucza, więc
 nie ma go w pliku.
+
+
+---
+
+# Aneks 2: powtórna kontrola całości
+
+Na prośbę o ponowne sprawdzenie przejrzałam wszystko jeszcze raz, innymi
+testami. **Znalazłam błąd, który sam wprowadziłem w poprzedniej rundzie.**
+
+## Błąd: zbyt agresywne scalanie wariantów
+
+Reguła „gdy to samo pytanie występuje w kilku wariantach, zostaw ten
+o najkrótszych odpowiedziach" grupowała pytania po **początku treści**.
+Tymczasem w ARCYBAZIE ten sam początek mają często zupełnie różne pytania
+z różnych lat — „Digoksyna:", „Kwas acetylosalicylowy:", „Wskaż prawdziwe
+połączenie lek – wskazanie:". Reguła zlepiała je i kasowała.
+
+Przykład: pytanie „Na kanały sodowe ma wpływ:" istnieje w dwóch wersjach —
+jedna o bupiwakainie i propafenonie, druga o iwabradynie i ranolazynie.
+Zostawiona była tylko jedna.
+
+**Naprawa:** warianty scalam teraz wyłącznie wtedy, gdy mają tyle samo
+odpowiedzi i każda para odpowiada sobie tekstowo (jedna jest prefiksem
+drugiej) — czyli różnią się dokładnie tym, że do jednej doklejono notatkę.
+Odzyskane **70 pytań**: 802 → 872.
+
+## Pozostałe kontrole
+
+| Test | Wynik |
+|---|---|
+| integralność CSV/XLSX (kolumny, puste pola, dziury w `True`/`False`, `Type`, `Poziom`) | bez zastrzeżeń we wszystkich 5 plikach |
+| czy wybrany wariant stracił odpowiedzi względem odrzuconego | 0 przypadków |
+| weryfikacja wzrokowa — 2 nowe strony PDF (60 i 158), 13 pytań | **13/13 zgodnych co do każdej odpowiedzi** |
+| czy oba warianty pytań o podobnym początku zostały zachowane | tak, sprawdzone na „zespół serotoninowy" i „pantoprazol" |
+| doklejone numery stron | 18 kandydatów, 17 to prawidłowe „cukrzyca typu 2" / „fosfodiesterazy 4"; **1 realny artefakt poprawiony** |
+| duplikaty identyczne (treść + odpowiedzi) w całym zestawie | 1 — znany duplikat 2014/2015 pyt. 61 = 2016 pyt. 61 |
+| audyt zanieczyszczeń studenckich | **0 trafień** detektora słownikowego |
+
+## Znane, nierozstrzygnięte niejednoznaczności
+
+W 11 przypadkach ten sam wariant pytania jest w różnych latach **zaznaczony
+inaczej przez samych studentów**. W 6 z nich różnica wynika z doklejonej
+notatki i wybór krótszej wersji jest oczywiście poprawny. W pozostałych 5
+źródło po prostu sobie przeczy, a ja wybieram wersję o czystszym tekście:
+
+- „Terapia cukrzycy typu 2 podskórnie" — jedna wersja zaznacza sam detemir,
+  druga detemir **i liraglutyd** (liraglutyd też podaje się podskórnie)
+- „Farmakoterapia POChP kategoria A i B"
+- „Farmakoterapia otyłości" — druga wersja dodaje naltrekson
+- „Metoklopramid"
+- „Lek – monitorowanie" — odrzucona wersja zawierała błąd (dabigatran–INR)
+
+Te 5 warto przejrzeć.
+
+## Stan końcowy
+
+| Plik | Pytań |
+|---|---|
+| 2014/2015 | 100 |
+| 2016 | 99 |
+| 2016/2017 | 100 |
+| 2022 | 69 |
+| ARCYBAZA | 872 |
+| **razem** | **1240** |
+
+Importer wczytuje **1085 / 1240**; po dopisaniu ośmiu działów — wszystkie.

@@ -54,9 +54,18 @@ DIRTY = re.compile(
     r'|\b(chyba|imo|nwm|moim zdaniem|wg mnie|nie pamiętam|prezka|slajd|sketchy)\b')
 
 
+# punktowe poprawki tekstu wykryte podczas weryfikacji wzrokowej
+TEXT_FIXES = [
+    # numer strony wkleil sie w tresc opcji (str. 60 PDF, pyt. 65)
+    (re.compile(r'(barierę krew- mózg)\s+22$'), r'\1'),
+]
+
+
 def strip_note(t):
     for rx in CUT:
         t = rx.sub('', t)
+    for rx, rep in TEXT_FIXES:
+        t = rx.sub(rep, t)
     return re.sub(r'\s+', ' ', t).strip(' .;,–-')
 
 
@@ -117,21 +126,52 @@ def collect():
             continue
         kept.append(q)
 
-    # Ten sam stem bywa w dokumencie w kilku wariantach - jeden czysty, inny
-    # z notatka doklejona do opcji. Zostawiamy wariant o najkrotszych opcjach.
-    best = {}
+    # Ten sam stem bywa w dokumencie w kilku wariantach: jeden czysty, drugi
+    # z notatka doklejona do opcji. ALE ten sam stem ("Digoksyna:", "Wskaz
+    # prawdziwe polaczenie lek-wskazanie:") miewaja tez ROZNE pytania z roznych
+    # lat. Scalamy wiec tylko wtedy, gdy zestawy opcji faktycznie sie pokrywaja
+    # (podobienstwo Jaccarda >= 0.5); inaczej zostawiamy oba pytania.
+    by_stem = {}
     for q in kept:
-        stem = norm(q['text'])[:80]
-        w = sum(len(o['text']) for o in q['opts'])
-        if stem not in best or w < best[stem][0]:
-            if stem in best:
-                stats['wariant z notatka'] += 1
-            best[stem] = (w, q)
-        else:
-            stats['wariant z notatka'] += 1
+        by_stem.setdefault(norm(q['text'])[:80], []).append(q)
+
+    def same_question(a, b):
+        """Warianty tego samego pytania roznia sie tylko doklejona notatka:
+        tyle samo opcji, a kazda para to identyczne teksty albo jeden jest
+        prefiksem drugiego. Rozne pytania o tym samym stemie NIE sa scalane."""
+        if len(a['opts']) != len(b['opts']):
+            return False
+        used = set()
+        for oa in a['opts']:
+            ta = norm(oa['text'])
+            for j, ob in enumerate(b['opts']):
+                if j in used:
+                    continue
+                tb = norm(ob['text'])
+                if ta == tb or tb.startswith(ta) or ta.startswith(tb):
+                    used.add(j)
+                    break
+            else:
+                return False
+        return True
+
+    finals = []
+    for group in by_stem.values():
+        clusters = []
+        for q in group:
+            for cl in clusters:
+                if same_question(q, cl[0]):
+                    cl.append(q)
+                    break
+            else:
+                clusters.append([q])
+        for cl in clusters:
+            cl.sort(key=lambda q: sum(len(o['text']) for o in q['opts']))
+            finals.append(cl[0])
+            stats['wariant z notatka'] += len(cl) - 1
 
     seen, out = {}, []
-    for _, q in best.values():
+    for q in finals:
         key = norm(q['text']) + '|' + '|'.join(
             sorted(norm(o['text']) for o in q['opts']))
         if key in seen:

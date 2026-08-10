@@ -1,4 +1,4 @@
-# ARCYBAZA FARMA — 802 pytania
+# ARCYBAZA FARMA — 872 pytania
 
 > **Zaktualizowane po weryfikacji** (patrz `README_weryfikacja.md`): usunięto
 > całą adnotowaną kopię studencką IWL i warianty pytań z doklejonymi
@@ -29,7 +29,7 @@ w pliku 2016/2017, a inaczej niż w plikach 2014/2015, 2016 i 2022.
 
 Pytania mają 4 opcje, z których poprawna może być dowolna liczba (1–4).
 To dokładnie model Only Pharms: `True` = opcje podświetlone, `False` =
-pozostałe. Rozkład: 1 poprawna – 149, 2 – 313, 3 – 195, 4 – 145.
+pozostałe. Rozkład: 1 poprawna – 160, 2 – 338, 3 – 213, 4 – 161.
 
 ## Bilans
 
@@ -38,10 +38,10 @@ pozostałe. Rozkład: 1 poprawna – 149, 2 – 313, 3 – 195, 4 – 145.
 | pytań sparsowanych | 1617 |
 | odrzucone: brak klucza | 126 |
 | odrzucone: adnotowana kopia IWL | 524 |
-| odrzucone: warianty z notatką | 174 |
+| odrzucone: warianty z notatką | 104 |
 | odrzucone: zanieczyszczone | 2 |
 | odrzucone: brak działu | 4 |
-| **wyeksportowane** | **802** |
+| **wyeksportowane** | **872** |
 
 Cały egzamin **EGZ 2015 I termin (95 pytań) nie ma zaznaczonego klucza** —
 zgodne z notą na okładce, że oficjalny klucz jest dopiero od 2018. To
@@ -50,15 +50,15 @@ większość odrzuconych ze 126.
 Duplikaty liczone po treści pytania **razem z kompletem opcji**, więc
 pytania powtórzone między latami zostały scalone do jednego wiersza.
 
-**145 pytań ma wszystkie opcje poprawne**, czyli zero dystraktorów. Będą
+**161 pytań ma wszystkie opcje poprawne**, czyli zero dystraktorów. Będą
 działać jako fiszki i pytania na wpisywanie, ale nie w trybie ABCD
 (`canAbcd` wymaga co najmniej jednego `False`). Nie dopisywałam do nich
-dystraktorów — przy tej skali byłoby to 145 zmyślonych zestawów.
+dystraktorów — przy tej skali byłoby to 161 zmyślonych zestawów.
 
 ## Klasyfikacja jest automatyczna — to główna różnica
 
 W poprzednich czterech plikach `Section` i `Category` przypisywałam ręcznie,
-pytanie po pytaniu. Przy 802 pytaniach zrobił to klasyfikator słownikowy
+pytanie po pytaniu. Przy 872 pytaniach zrobił to klasyfikator słownikowy
 (ok. 900 wzorców leków i pojęć, ograniczony do nazw dozwolonych
 w `JAK_KATEGORYZOWAC.txt`).
 
@@ -67,9 +67,9 @@ oparte jest przypisanie działu:
 
 | Pewność | Pytań | Co to znaczy |
 |---|---|---|
-| wysoka | 309 | 3+ trafienia — przypisanie praktycznie pewne |
-| średnia | 249 | 2 trafienia |
-| niska | 244 | 1 trafienie — **te warto przejrzeć** |
+| wysoka | 343 | 3+ trafienia — przypisanie praktycznie pewne |
+| średnia | 271 | 2 trafienia |
+| niska | 258 | 1 trafienie — **te warto przejrzeć** |
 
 Rozkład kategorii wyszedł zbliżony do plików robionych ręcznie (Wskazania
 34%, Klasyfikacja 25%, Działania niepożądane 12%), ale „Klasyfikacja" jest
@@ -94,7 +94,7 @@ tematy nieobecne w egzaminach stomatologicznych:
 ## Do dopisania w `server.py`
 
 Uruchomiłam prawdziwy importer na wszystkich pięciu plikach naraz.
-Z 1170 wierszy wczytuje się dziś **1026**; pozostałe **144** wpada
+Z 1240 wierszy wczytuje się dziś **1085**; pozostałe **155** wpada
 w `if not dzial: continue` i znika bez komunikatu. Wystarczy dopisać
 do `SECTION_ALIASES`:
 
@@ -113,18 +113,18 @@ do `SECTION_ALIASES`:
 propozycje ID; każdy nowy dział trzeba też dodać do listy działów
 w aplikacji.)
 
-Po dopisaniu wczytuje się **1170 / 1170 pytań**.
+Po dopisaniu wczytuje się **1240 / 1240 pytań**.
 
 ## Czego nie zrobiłam
 
 - Kontrola krzyżowa jest opisana w `README_weryfikacja.md`. Nie sprawdzałam
-  jednak merytorycznie każdego z 802 pytań osobno — klucz pochodzi od
+  jednak merytorycznie każdego z 872 pytań osobno — klucz pochodzi od
   studentów (poza latami 2018+, gdzie okładka deklaruje klucz oficjalny)
   i miejscami może być błędny.
 - Nie usuwałam pytań powtarzających się między ARCYBAZĄ a czterema
   wcześniejszymi plikami — to inne kierunki (lekarski vs stomatologia)
   i inne brzmienia, ale część tematów się pokrywa.
-- Nie dopisywałam dystraktorów do 145 pytań, które ich nie mają.
+- Nie dopisywałam dystraktorów do 161 pytań, które ich nie mają.
 
 ## Stan całości
 
@@ -134,5 +134,5 @@ Po dopisaniu wczytuje się **1170 / 1170 pytań**.
 | 2016 | 99 | ustalony merytorycznie |
 | 2016/2017 | 100 | oficjalny klucz z PDF |
 | 2022 | 69 | rekonstrukcja studencka |
-| ARCYBAZA | 802 | z podświetleń w PDF |
-| **razem** | **1170** | |
+| ARCYBAZA | 872 | z podświetleń w PDF |
+| **razem** | **1240** | |
