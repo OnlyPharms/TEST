@@ -85,7 +85,7 @@ Co zrobiłam:
   że zdarzają się niedomarkowania — mogą być kolejne, których nie wykryje
   porównanie między źródłami, bo dane pytanie występuje tylko raz.
 - **Klasyfikacja `Section`/`Category` w ARCYBAZIE pozostaje automatyczna.**
-  312 pytań ma pewność „niska" — to wciąż pozycja do przejrzenia.
+  244 pytania mają pewność „niska" — to wciąż pozycja do przejrzenia.
 - 37 pytań ma stem przeczący („nie", „fałszywe", „z wyjątkiem"). Są
   poprawnie odwzorowane, ale w trybie fiszki czyta się je nieintuicyjnie.
 

@@ -29,7 +29,7 @@ w pliku 2016/2017, a inaczej niż w plikach 2014/2015, 2016 i 2022.
 
 Pytania mają 4 opcje, z których poprawna może być dowolna liczba (1–4).
 To dokładnie model Only Pharms: `True` = opcje podświetlone, `False` =
-pozostałe. Rozkład: 1 poprawna – 207, 2 – 434, 3 – 266, 4 – 198.
+pozostałe. Rozkład: 1 poprawna – 149, 2 – 313, 3 – 195, 4 – 145.
 
 ## Bilans
 
@@ -40,7 +40,7 @@ pozostałe. Rozkład: 1 poprawna – 207, 2 – 434, 3 – 266, 4 – 198.
 | odrzucone: adnotowana kopia IWL | 524 |
 | odrzucone: warianty z notatką | 174 |
 | odrzucone: zanieczyszczone | 2 |
-| odrzucone: brak działu | 5 |
+| odrzucone: brak działu | 4 |
 | **wyeksportowane** | **802** |
 
 Cały egzamin **EGZ 2015 I termin (95 pytań) nie ma zaznaczonego klucza** —
@@ -50,15 +50,15 @@ większość odrzuconych ze 126.
 Duplikaty liczone po treści pytania **razem z kompletem opcji**, więc
 pytania powtórzone między latami zostały scalone do jednego wiersza.
 
-**195 pytań ma wszystkie opcje poprawne**, czyli zero dystraktorów. Będą
+**145 pytań ma wszystkie opcje poprawne**, czyli zero dystraktorów. Będą
 działać jako fiszki i pytania na wpisywanie, ale nie w trybie ABCD
 (`canAbcd` wymaga co najmniej jednego `False`). Nie dopisywałam do nich
-dystraktorów — przy tej skali byłoby to 195 zmyślonych zestawów.
+dystraktorów — przy tej skali byłoby to 145 zmyślonych zestawów.
 
 ## Klasyfikacja jest automatyczna — to główna różnica
 
 W poprzednich czterech plikach `Section` i `Category` przypisywałam ręcznie,
-pytanie po pytaniu. Przy 1105 pytaniach zrobił to klasyfikator słownikowy
+pytanie po pytaniu. Przy 802 pytaniach zrobił to klasyfikator słownikowy
 (ok. 900 wzorców leków i pojęć, ograniczony do nazw dozwolonych
 w `JAK_KATEGORYZOWAC.txt`).
 
@@ -67,9 +67,9 @@ oparte jest przypisanie działu:
 
 | Pewność | Pytań | Co to znaczy |
 |---|---|---|
-| wysoka | 451 | 3+ trafienia — przypisanie praktycznie pewne |
-| średnia | 342 | 2 trafienia |
-| niska | 312 | 1 trafienie — **te warto przejrzeć** |
+| wysoka | 309 | 3+ trafienia — przypisanie praktycznie pewne |
+| średnia | 249 | 2 trafienia |
+| niska | 244 | 1 trafienie — **te warto przejrzeć** |
 
 Rozkład kategorii wyszedł zbliżony do plików robionych ręcznie (Wskazania
 34%, Klasyfikacja 25%, Działania niepożądane 12%), ale „Klasyfikacja" jest
@@ -118,13 +118,13 @@ Po dopisaniu wczytuje się **1170 / 1170 pytań**.
 ## Czego nie zrobiłam
 
 - Kontrola krzyżowa jest opisana w `README_weryfikacja.md`. Nie sprawdzałam
-  jednak merytorycznie każdego z 1105 pytań osobno — klucz pochodzi od
+  jednak merytorycznie każdego z 802 pytań osobno — klucz pochodzi od
   studentów (poza latami 2018+, gdzie okładka deklaruje klucz oficjalny)
   i miejscami może być błędny.
 - Nie usuwałam pytań powtarzających się między ARCYBAZĄ a czterema
   wcześniejszymi plikami — to inne kierunki (lekarski vs stomatologia)
   i inne brzmienia, ale część tematów się pokrywa.
-- Nie dopisywałam dystraktorów do 195 pytań, które ich nie mają.
+- Nie dopisywałam dystraktorów do 145 pytań, które ich nie mają.
 
 ## Stan całości
 
